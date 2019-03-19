@@ -5,13 +5,20 @@ const PEOPLE_URL = "people/:id";
 
 const opts = { crossDomain: true };
 
-const onPeopleResponse = function(person) {
-  console.log(`Hola, my name is ${person.name}`);
-};
-
-const obtenerPersonaje = function(id) {
+const obtenerPersonaje = function(id, callback) {
   const url = `${API_URL}${PEOPLE_URL.replace(":id", id)}`;
-  $.get(url, opts, onPeopleResponse);
+  $.get(url, opts, function(person) {
+    console.log(`Hola, my name is ${person.name}`);
+    if (callback) {
+      callback();
+    }
+  });
 };
 
-obtenerPersonaje(2);
+obtenerPersonaje(1, function() {
+  obtenerPersonaje(2, function() {
+    obtenerPersonaje(3, function() {
+      obtenerPersonaje(4);
+    });
+  });
+});
