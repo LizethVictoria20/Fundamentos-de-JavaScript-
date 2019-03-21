@@ -42,3 +42,20 @@ fetch("https://rickandmortyapi.com/api/character")
   .catch(function() {
     console.log("La llamada no funcionó");
   });
+
+//Otra promesa con fetch
+fetch("https://swapi.co/api/people")
+  .then(value => {
+    return value.json();
+  })
+  .then(value => {
+    return value.results;
+  })
+  .then(value => {
+    value.forEach(function(character) {
+      console.log(`My name is ${character.name}`);
+    });
+  })
+  .catch(function() {
+    console.log("La llamada no funcionó");
+  });
