@@ -18,7 +18,14 @@ function onError(id) {
   console.log(`El personaje con el id ${id} no se pudo cargar`);
 }
 
-obtenerPersonaje(1)
+let ids = [1, 2, 3, 4, 5, 6, 7, 8];
+let promesas = ids.map(id => obtenerPersonaje(id));
+Promise.all(promesas)
+  .then(characters => console.log(characters))
+  .catch(onError);
+
+/*
+obtenerPersonaje(1) //Haciendo el request en serie
   .then(personaje => {
     console.log(`Hola, soy ${personaje.name}`);
     return obtenerPersonaje(2);
@@ -32,3 +39,4 @@ obtenerPersonaje(1)
     return obtenerPersonaje(4);
   })
   .catch(onError);
+*/
