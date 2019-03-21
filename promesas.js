@@ -25,3 +25,20 @@ obtenerPersonaje(10)
     console.log(`Hola, soy ${personaje.name}`);
   })
   .catch(onError);
+
+//Promesa con fetch
+fetch("https://rickandmortyapi.com/api/character")
+  .then(value => {
+    return value.json();
+  })
+  .then(value => {
+    return value.results;
+  })
+  .then(value => {
+    value.forEach(function(character) {
+      console.log(`My name is ${character.name}`);
+    });
+  })
+  .catch(function() {
+    console.log("La llamada no funcionó");
+  });
